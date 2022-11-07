@@ -37,8 +37,12 @@ class Sensor:
         self.id = id
         self.type = type_name
         pass
+    
     def __repr__(self) -> str:
-        return 'Id:{0}:{1}'.format(self.id, self.type)
+        return 'Repr: Id:{0}:{1}'.format(self.id, self.type)
+    
+    def __str__(self) -> str:
+        return 'Str: Id:{0}:{1}'.format(self.id, self.type)
 
 class Device:
     # Класс приборов
@@ -54,8 +58,12 @@ class DGS(Device):
         self.sensor = smart_sensor
         super().__init__(id, manuf_number, 'DGS')
         pass
+    
     def __call__(self):
          print(self.smart_sensor)
+
+    def __str__(self):
+        return f'STR DGS: {self.manuf_number} ({self.sensors[0].type})'   
 
 class PG(Device):
     # Класс Персональных Газоанализаторов
@@ -63,14 +71,33 @@ class PG(Device):
         self.sensors = sensors
         super().__init__(id, manuf_number, 'PG')
         pass
+
     def __call__(self):
          print(self.sensors)
 
+    def __str__(self):
+        return f'STR PG: {self.manuf_number} ({self.sensors[0].type})'     
 
-pg1 = PG(1,'ПГ-123456789', [Sensor(id+1, 'BS12-5') for id in range(4)])
-pg1()
-for sensor in pg1.sensors:
-    print(sensor)
+if __name__ == '__main__':
+
+    pg1 = PG(1,'ПГ-123456789', [Sensor(id+1, 'BS12-5') for id in range(4)])
+    pg1()
+    print(pg1.sensors)
+    print(pg1)
+    for sensor in pg1.sensors:
+        print(sensor)
+    devices = []
+    for i in range(10):
+        devices.append(DGS(i+1, f'DGS-210000{i}', Sensor(i,'smart')))
+        devices.append(PG(i+1, f'ПГ-100000{i}', [Sensor(id+i+1, 'BS12-5') for id in range(4)]))
+
+    for device in devices:
+        print(device.manuf_number)
+
+    print(f'Родительский класс класса {type(pg1).__name__}: {type(pg1).__base__.__name__}')
+        
+
+
 
 
 
