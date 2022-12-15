@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <style>
+
+    </style>
+
+    <body>
+        <h1>Письма:</h1>
+        <div style="max-width: 50%; flex: auto;">
+            <ol>
+            {% for message in inbox %}
+                <li>{{message['header']['subject']}}</li>
+            {% endfor %}
+            </ol>
+        </div>
+        <div style="flex:auto;">
+            <button id="getDataButton">
+                Получить данные из файла
+            </button>
+        </div>
+    </body>
+</html>
