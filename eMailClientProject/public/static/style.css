@@ -1,0 +1,70 @@
+.messagesBox{
+    display: flex;
+}
+
+.inboxBox{
+    height: 80vh;
+    background-color: beige;
+    width: 50%;
+    flex: auto;
+    overflow: scroll;
+    display: inline-block;
+}
+
+.emailForm{
+    padding: 0em;
+    padding-left: 0%;
+}
+
+.selectedMessageBox{
+    width: 50%;
+    display: inline-block;
+    overflow-y: scroll;
+    overflow-x: auto;
+}
+
+.selectedMessageHTML{
+    height: 80vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.selectedMessageSubject{
+    background-color: bisque;
+    padding: 1%;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    border-style: solid;
+    border-width: thick;
+    border-color: gray;
+    text-align: center;
+}
+
+.msgAdditionalData{
+    margin: 0%;
+    padding: 0%;
+    padding-left: 1em;
+    font-size: 12px;
+    font-weight:lighter;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: left;
+}
+
+.messsageListItem{
+    padding: 10px;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100%;
+}
+
+.AppUI{
+    border-style: solid;
+    border-width: thick;
+    height: 80vh;
+    overflow: hidden;
+}
+.AppUI .AppBar{
+    border-style: solid;
+    border-width: thick;
+    border-color: blue;
+}

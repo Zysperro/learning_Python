@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Email spam filter ✨✨✨</title>
+        <link rel="stylesheet" href="static/style.css">
+    </head>
+    <body>
+        <div class="AppUI">
+            <div class="AppBar">
+                <form class="filesForm" action="/get_files" method="POST" enctype="multipart/form-data">
+                    <h3 style="margin: 0%">Файлы:</h3>
+                    <input id="filesButton" name="file" type="file" name="getDataFromFileButton" multiple="multiple" />
+                    <input type="submit" formmethod="post" value="Получить письма из файлов" id="getDataFromFilesButton" />
+                </form>
+                <form class="emailForm" action="get_mail" method="POST">
+                    <h3 style="margin: 0%">Электронные письма:</h3>
+                    <select id="providerList" name="providerList">
+                        <option value="yandex.ru" selected>yandex.ru</option>
+                        <option value="google.com">google.com</option>
+                    </select>
+                    <input type="text" name="username" value="{{ mail_address }}" />
+                    <input type="password" name="userpw" value="{{ mail_pass }}" />
+                    <input type="submit" id="getDataFromMailButton" />
+                    Загрузить письма из почты
+                </form>
+            </div>
+            <div class="messagesBox">
+                <div class="inboxBox">
+                    <ol>
+                        <form name="inboxBoxForm" action="selectmsg" method="post">
+                            {% for message in inbox %}
+                            <li><input name="messsageListItem" type="submit" id="{{message['header']['header']['message-id']}}" class="messsageListItem" value="{{ message['header']['subject'] }}" /></li>
+                            {% endfor %}
+                        </form>
+                    </ol>
+                </div>
+                <div class="selectedMessageBox">
+                    <div class="selectedMessageSubject">
+                        {% for msgItem in selectedMessageF %}
+                        <div class="msgAdditionalData">
+                            <br />
+                            Получено: {{ msgItem['header']['date'] }} <br />
+                            От: {{ msgItem['header']['from'] }} <br />
+                            Домены: {{ msgItem['header']['received_domain'] }} <br />
+                            Цепочка IP: {{ msgItem['header']['received_ip'][:-1] }}
+                        </div>
+                        {% endfor %}
+                        <br />
+                        {{ selectedMessageSubjectF }}
+                    </div>
+                    <div class="selectedMessageHTML">{{ selectedMessageHTML|safe }}</div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
